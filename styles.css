@@ -309,50 +309,66 @@ h1, h2, h3, h4 {
    4. FELSŐ ÉRTESÍTÉSI SÁV (ANNOUNCEMENT BAR)
    -------------------------------------------------------------------------- */
 .announcement-bar {
-  background-color: #241614;
+  background: linear-gradient(90deg, #1A100E 0%, #2A1714 50%, #1A100E 100%);
   color: #F8ECE7;
-  font-size: 0.875rem;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(232, 218, 209, 0.15);
+  font-size: 0.8125rem;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(232, 218, 209, 0.12);
+  position: relative;
+  z-index: 101;
 }
 
 .announcement-inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
+  gap: 12px;
   flex-wrap: wrap;
   text-align: center;
+  line-height: 1.4;
 }
 
 .announcement-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: var(--color-promo);
+  background: linear-gradient(135deg, var(--color-promo) 0%, #F59E0B 100%);
   color: #FFFFFF;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   padding: 3px 10px;
   border-radius: var(--radius-pill);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(225, 29, 72, 0.3);
+}
+
+.announcement-text {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .announcement-text strong {
   color: #FFFFFF;
+  font-weight: 600;
 }
 
 .announcement-link {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: #F3C3B3;
+  color: #F8ECE7;
   font-weight: 600;
   text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  transition: color 0.15s ease;
 }
 
 .announcement-link:hover {
-  color: #FFFFFF;
+  color: #F59E0B;
 }
 
 /* --------------------------------------------------------------------------
@@ -362,10 +378,11 @@ h1, h2, h3, h4 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(250, 246, 242, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(250, 246, 242, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 2px 12px rgba(36, 22, 20, 0.04);
   transition: all var(--transition-fast);
 }
 
@@ -373,32 +390,40 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 76px;
+  gap: var(--space-md);
+  height: 72px;
 }
 
 .brand-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .logo-badge-frame {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background: radial-gradient(circle, #FFFFFF 60%, var(--color-bg-alt) 100%);
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
   padding: 4px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(167, 101, 81, 0.12);
+  flex-shrink: 0;
+  overflow: hidden;
   transition: transform var(--transition-normal), border-color var(--transition-normal);
 }
 
 .brand-logo:hover .logo-badge-frame {
-  transform: scale(1.05);
+  transform: scale(1.06);
   border-color: var(--color-primary);
 }
 
@@ -406,86 +431,138 @@ h1, h2, h3, h4 {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
 }
 
 .logo-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .brand-name {
   font-family: var(--font-serif);
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-text-main);
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .brand-tagline {
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   letter-spacing: 0.12em;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-primary);
   margin-top: 2px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* Navigáció */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
 }
 
 .desktop-nav .nav-list {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
 }
 
 .nav-link {
-  font-size: 0.9375rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: var(--color-text-muted);
   position: relative;
-  padding: 6px 0;
+  padding: 6px 4px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 .nav-link:hover, .nav-link.active {
   color: var(--color-primary);
 }
 
+/* Fejléc Jobb Oldali Elemek */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: 10px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .phone-quicklink {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.875rem;
+  gap: 6px;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-text-muted);
-  padding: 8px 12px;
+  color: var(--color-text-main);
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 8px 14px;
   border-radius: var(--radius-pill);
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
   transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.phone-quicklink svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
 }
 
 .phone-quicklink:hover {
   background-color: var(--color-bg-alt);
+  border-color: var(--color-primary);
   color: var(--color-primary);
+}
+
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 9px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
 }
 
 /* Mobil Hamburger Gomb */
 .mobile-nav-toggle {
   display: none;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .hamburger-bar {
-  width: 22px;
+  width: 20px;
   height: 2px;
   background-color: var(--color-text-main);
   border-radius: 2px;
@@ -3062,13 +3139,66 @@ h1, h2, h3, h4 {
   }
 }
 
-@media (max-width: 768px) {
-  .desktop-nav, .phone-quicklink, .header-cta-btn {
+@media (max-width: 1240px) and (min-width: 1081px) {
+  .desktop-nav .nav-list {
+    gap: 12px;
+  }
+  .nav-link {
+    font-size: 0.8125rem;
+  }
+  .phone-quicklink .phone-number {
+    display: none;
+  }
+  .phone-quicklink {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .brand-tagline {
+    font-size: 0.5625rem;
+  }
+}
+
+@media (max-width: 1080px) {
+  .desktop-nav {
     display: none;
   }
 
   .mobile-nav-toggle {
     display: flex;
+  }
+
+  .phone-quicklink .phone-number {
+    display: none;
+  }
+
+  .phone-quicklink {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .header-cta-btn {
+    padding: 8px 14px;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .phone-quicklink, .header-cta-btn {
+    display: none;
+  }
+
+  .brand-tagline {
+    display: none;
+  }
+
+  .brand-name {
+    font-size: 1.125rem;
   }
 
   .section {
