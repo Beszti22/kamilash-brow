@@ -3077,6 +3077,18 @@ h1, h2, h3, h4 {
   color: #A89892;
 }
 
+.created-by a {
+  color: #E8DAD1;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.created-by a:hover {
+  color: #FFFFFF;
+}
+
 /* --------------------------------------------------------------------------
    15. LEBEGŐ MOBIL SÁV (STICKY MOBILE BOTTOM BAR)
    -------------------------------------------------------------------------- */
