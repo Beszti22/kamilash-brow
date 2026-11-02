@@ -1021,12 +1021,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   // =========================================================================
-  // 16. ALAPÉRTELMEZETT INDÍTÁS
+  // 16. ALAPÉRTELMEZETT INDÍTÁS & URL PARAMÉTEREK
   // =========================================================================
   renderWizardServices();
   renderCalendar();
   renderTimeSlots();
   updateSummary();
+
+  // Előre kiválasztott kezelés átvétele más oldalakról (?service=id)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get('service');
+    if (serviceParam && SERVICES_DATA.some(s => s.id === serviceParam)) {
+      bookingState.selectedServiceIds = [serviceParam];
+      renderWizardServices();
+      updateSummary();
+      goToStep(2); // Azonnal a naptárhoz lép az ügyfél kényelméért!
+    }
+  } catch (err) {
+    console.warn('URL search params nem értelmezhető:', err);
+  }
 
   // =========================================================================
   // 17. HERO INTERAKTÍV 3D MOUSE PARALLAX TILT
