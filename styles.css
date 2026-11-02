@@ -2087,7 +2087,7 @@ h1, h2, h3, h4 {
   border-radius: var(--radius-md);
   background-color: #FFFFFF;
   color: var(--color-text-main);
-  font-size: 0.9375rem;
+  font-size: 1rem; /* 16px megelőzi az iOS Safari automatikus ráközelítését */
   transition: all var(--transition-fast);
 }
 
@@ -3065,6 +3065,7 @@ h1, h2, h3, h4 {
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border);
   padding: 10px 16px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   z-index: 90;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
 }
@@ -3241,7 +3242,12 @@ h1, h2, h3, h4 {
   }
 
   body {
-    padding-bottom: 64px; /* Hely a mobil lebegő sávnak */
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); /* Hely a mobil lebegő sávnak */
+  }
+
+  .time-periods-container {
+    max-height: none;
+    overflow-y: visible;
   }
 }
 
