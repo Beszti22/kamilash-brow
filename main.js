@@ -1028,4 +1028,54 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTimeSlots();
   updateSummary();
 
+  // =========================================================================
+  // 17. HERO INTERAKTÍV 3D MOUSE PARALLAX TILT
+  // =========================================================================
+  const heroVisual = document.querySelector('.hero-visual');
+  const heroCardStack = document.querySelector('.hero-card-stack');
+  const studioCard = document.querySelector('.hero-studio-card');
+  const reviewCard = document.querySelector('.hero-review-card');
+
+  if (heroVisual && heroCardStack && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let isHovering = false;
+
+    heroVisual.addEventListener('mouseenter', () => {
+      isHovering = true;
+    });
+
+    heroVisual.addEventListener('mousemove', (e) => {
+      if (!isHovering || window.innerWidth < 1024) return;
+      const rect = heroVisual.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      heroCardStack.style.transform = `perspective(1000px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+      if (studioCard) {
+        studioCard.style.transform = `translate(${x * 16}px, ${y * 16}px)`;
+      }
+      if (reviewCard) {
+        reviewCard.style.transform = `translate(${-x * 16}px, ${-y * 16}px)`;
+      }
+    });
+
+    heroVisual.addEventListener('mouseleave', () => {
+      isHovering = false;
+      heroCardStack.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+      heroCardStack.style.transition = 'transform 0.5s ease-out';
+      if (studioCard) {
+        studioCard.style.transform = '';
+        studioCard.style.transition = 'transform 0.5s ease-out';
+      }
+      if (reviewCard) {
+        reviewCard.style.transform = '';
+        reviewCard.style.transition = 'transform 0.5s ease-out';
+      }
+      setTimeout(() => {
+        heroCardStack.style.transition = '';
+        if (studioCard) studioCard.style.transition = '';
+        if (reviewCard) reviewCard.style.transition = '';
+      }, 500);
+    });
+  }
+
 });
