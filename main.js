@@ -4,6 +4,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.__KAMILASH_INITIALIZED__) {
+    return;
+  }
+  window.__KAMILASH_INITIALIZED__ = true;
 
   // =========================================================================
   // 1. ADATMODELL – SZOLGÁLTATÁSOK & ÁRLISTA (A SZÓRÓLAP ALAPJÁN)
@@ -108,30 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // =========================================================================
-  // 3. MOBIL NAVIGÁCIÓ KEZELÉSE
+  // 3. MOBIL NAVIGÁCIÓ KEZELÉSE (HAMBURGER MENÜ)
   // =========================================================================
   const mobileNavToggle = document.getElementById('mobileNavToggle');
   const mobileNavMenu = document.getElementById('mobileNavMenu');
 
-  if (mobileNavToggle && mobileNavMenu) {
-    mobileNavToggle.addEventListener('click', () => {
-      const isOpen = mobileNavMenu.classList.contains('open');
-      if (isOpen) {
-        closeMobileNav();
-      } else {
-        openMobileNav();
-      }
-    });
-
-    const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-nav-footer a');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        closeMobileNav();
-      });
-    });
-  }
-
   function openMobileNav() {
+    if (!mobileNavToggle || !mobileNavMenu) return;
     mobileNavToggle.classList.add('open');
     mobileNavToggle.setAttribute('aria-expanded', 'true');
     mobileNavMenu.classList.add('open');
@@ -140,11 +127,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeMobileNav() {
+    if (!mobileNavToggle || !mobileNavMenu) return;
     mobileNavToggle.classList.remove('open');
     mobileNavToggle.setAttribute('aria-expanded', 'false');
     mobileNavMenu.classList.remove('open');
     mobileNavMenu.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('nav-open');
+  }
+
+  if (mobileNavToggle && mobileNavMenu) {
+    mobileNavToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = mobileNavMenu.classList.contains('open');
+      if (isOpen) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
+      }
+    });
+
+    // Menüpontra kattintva zárjuk be a menüt
+    const mobileLinks = mobileNavMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileNav();
+      });
+    });
+
+    // Ha a menün kívüli üres területre kattint
+    mobileNavMenu.addEventListener('click', (e) => {
+      if (e.target === mobileNavMenu) {
+        closeMobileNav();
+      }
+    });
+
+    // Escape billentyűre bezárás
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNavMenu.classList.contains('open')) {
+        closeMobileNav();
+      }
+    });
   }
 
   // =========================================================================
