@@ -3472,6 +3472,65 @@ h1, h2, h3, h4 {
   border-radius: 2px;
 }
 
+/* Minup Hivatalos Alternatíva Doboz */
+.minup-badge-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  background: linear-gradient(135deg, rgba(167, 101, 81, 0.07) 0%, rgba(196, 151, 100, 0.08) 100%);
+  border: 1px solid rgba(167, 101, 81, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.5rem;
+  margin: 1.75rem auto 2.25rem;
+  max-width: 720px;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(167, 101, 81, 0.06);
+}
+
+.minup-icon-box {
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.minup-text-box {
+  flex-grow: 1;
+}
+
+.minup-text-box strong {
+  display: block;
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.minup-text-box span {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.minup-direct-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .minup-badge-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.875rem;
+    padding: 1rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+  .minup-direct-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* --------------------------------------------------------------------------
    17. REDUCED MOTION (HOZZÁFÉRHETŐSÉG)
    -------------------------------------------------------------------------- */
